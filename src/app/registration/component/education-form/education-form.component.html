@@ -1,0 +1,122 @@
+<div class="py-4 div-top-border">
+  <h1>Education</h1>
+  <form [formGroup]="educationForm">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>School Name<sup class="text-danger">*</sup></mat-label>
+            <input formControlName="schoolName" matInput placeholder="Enter School Name" type="text">
+            <mat-icon class="mr-2" matPrefix>school</mat-icon>
+            <mat-error *ngIf="educationForm.controls.schoolName.hasError('required')">
+              School name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>City<sup class="text-danger">*</sup></mat-label>
+            <input formControlName="city" matInput placeholder="Enter city" type="text">
+            <mat-icon class="mr-2" matPrefix>apartment</mat-icon>
+            <mat-error *ngIf="educationForm.controls.city.hasError('required')">
+              City is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Country<sup class="text-danger">*</sup></mat-label>
+            <input formControlName="country" matInput placeholder="Enter country" type="text">
+            <mat-icon class="mr-2" matPrefix>apartment</mat-icon>
+            <mat-error *ngIf="educationForm.controls.country.hasError('required')">
+              Country is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Start Year<sup class="text-danger">*</sup></mat-label>
+            <input [matDatepicker]="startDatepicker" formControlName="startYear" matInput readonly>
+            <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
+            <mat-datepicker-toggle [for]="startDatepicker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #startDatepicker (monthSelected)="chosenMonthHandler($event, startDatepicker)"
+                            (yearSelected)="chosenYearHandler($event)"
+                            startView="multi-year">
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+            <mat-error *ngIf="educationForm.controls.startYear.hasError('required')">
+              Start year is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>End Year<sup class="text-danger">*</sup></mat-label>
+            <input [matDatepicker]="endDatepicker" formControlName="endYear" matInput readonly>
+            <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
+            <mat-datepicker-toggle [for]="endDatepicker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #endDatepicker (monthSelected)="chosenMonthHandler($event, endDatepicker)"
+                            (yearSelected)="chosenYearHandler($event)"
+                            startView="multi-year">
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+            <mat-error *ngIf="educationForm.controls.endYear.hasError('required')">
+              End year is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-checkbox (change)="isPresentChecked($event.checked)" class="mx-5" formControlName="isPresent">Present
+          </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mx-5 col">
+          <button (click)="resetForm()" [disableRipple]="true" class="btn-sm btn-danger mr-4" mat-raised-button
+                  type="button">
+            Reset
+          </button>
+          <button (click)="onAdd()" [disableRipple]="true" [disabled]="educationForm.invalid" class="btn-sm btn-danger"
+                  mat-raised-button type="button">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+  <form [formGroup]="userRegistrationForm" class="mt-4">
+    <table formArrayName="education">
+      <tr>
+        <th>School Name</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Start Month/Year</th>
+        <th>End Month/Year</th>
+      </tr>
+      <tbody *ngIf="educationFormArray.controls.length else noData">
+      <tr *ngFor="let data of educationFormArray.controls; let i = index" [formGroupName]="i">
+        <td>{{data.value.schoolName}}</td>
+        <td>{{data.value.city}}</td>
+        <td>{{data.value.country}}</td>
+        <td>{{data.value.startYear | date: 'MM/yyyy'}}</td>
+        <td>{{data.value.endYear | date: 'MM/yyyy'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<ng-template #noData>
+  <td [colSpan]="5" class="font-italic text-center">No data to display</td>
+</ng-template>

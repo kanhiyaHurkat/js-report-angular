@@ -1,0 +1,89 @@
+<div class="py-4 div-top-border">
+  <h1>Last Period Rating</h1>
+  <form [formGroup]="lastPeriodForm">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Period</mat-label>
+            <input formControlName="period" matInput placeholder="Enter Period" type="number">
+            <mat-icon class="mr-2" matPrefix>person_outline</mat-icon>
+            <mat-error *ngIf="lastPeriodForm.controls.period.hasError('required')">
+              Period is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>High Course</mat-label>
+            <input formControlName="mediumCourses" matInput placeholder="Enter mediumCourses" type="number">
+            <mat-icon class="mr-2" matPrefix>lock_outline</mat-icon>
+            <mat-error *ngIf="lastPeriodForm.controls.mediumCourses.hasError('required')">
+              High Course is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Medium Course</mat-label>
+            <input formControlName="highCourses" matInput placeholder="Enter highCourses" type="number">
+            <mat-icon class="mr-2" matPrefix>lock_outline</mat-icon>
+            <mat-error *ngIf="lastPeriodForm.controls.highCourses.hasError('required')">
+              Medium Course is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Low Course</mat-label>
+            <input formControlName="lowCourses" matInput placeholder="Enter lowCourses" type="number">
+            <mat-icon class="mr-2" matPrefix>lock_outline</mat-icon>
+            <mat-error *ngIf="lastPeriodForm.controls.lowCourses.hasError('required')">
+              Low Course is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mx-5 col">
+
+          <button (click)="resetForm()" [disableRipple]="true" class="btn-sm btn-danger mr-4" mat-raised-button
+                  type="button">
+            Reset
+          </button>
+
+          <button (click)="onAdd()" [disableRipple]="true" [disabled]="lastPeriodForm.invalid" class="btn-sm btn-danger"
+                  mat-raised-button type="button">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <form [formGroup]="userRegistrationForm" class="mt-4">
+    <table formArrayName="lastRating">
+      <tr>
+        <th>Period</th>
+        <th>High Course</th>
+        <th>Medium Course</th>
+        <th>Low Course</th>
+      </tr>
+      <tbody *ngIf="lastPeriodFormArray.controls.length else noData">
+      <tr *ngFor="let data of lastPeriodFormArray.controls; let i = index" [formGroupName]="i">
+        <td>{{data.value.period}}</td>
+        <td>{{data.value.highCourses}}</td>
+        <td>{{data.value.mediumCourses}}</td>
+        <td>{{data.value.lowCourses}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<ng-template #noData>
+  <td [colSpan]="5" class="font-italic text-center">No data to display</td>
+</ng-template>

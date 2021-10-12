@@ -1,0 +1,98 @@
+<div class="py-4 div-top-border">
+  <h1>Scores</h1>
+  <form [formGroup]="scoreForm">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Period</mat-label>
+            <input formControlName="period" matInput placeholder="Enter Period" type="number">
+            <mat-icon class="mr-2" matPrefix>feed</mat-icon>
+            <mat-error *ngIf="scoreForm.controls.period.hasError('required')">
+              Period is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Course</mat-label>
+            <input formControlName="course" matInput placeholder="Enter course" type="text">
+            <mat-icon class="mr-2" matPrefix>task</mat-icon>
+            <mat-error *ngIf="scoreForm.controls.course.hasError('required')">
+              Course is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Credits</mat-label>
+            <input formControlName="credits" matInput placeholder="Enter credits" type="number">
+            <mat-icon class="mr-2" matPrefix>credit_card</mat-icon>
+            <mat-error *ngIf="scoreForm.controls.credits.hasError('required')">
+              Credits is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Home Room</mat-label>
+            <input formControlName="homeroom" matInput placeholder="Enter homeroom" type="number">
+            <mat-icon class="mr-2" matPrefix>meeting_room</mat-icon>
+            <mat-error *ngIf="scoreForm.controls.homeroom.hasError('required')">
+              Home Room is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field [floatLabel]="'never'" appearance="outline">
+            <mat-label>Score</mat-label>
+            <input formControlName="score" matInput placeholder="Enter score" type="number">
+            <mat-icon class="mr-2" matPrefix>score</mat-icon>
+            <mat-error *ngIf="scoreForm.controls.score.hasError('required')">
+              Score is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mx-5 col">
+          <button (click)="resetForm()" [disableRipple]="true" class="btn-sm btn-danger mr-4" mat-raised-button
+                  type="button">
+            Reset
+          </button>
+          <button (click)="onAdd()" [disableRipple]="true" [disabled]="scoreForm.invalid" class="btn-sm btn-danger"
+                  mat-raised-button type="button">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <form [formGroup]="userRegistrationForm" class="mt-4">
+    <table formArrayName="scores">
+      <tr>
+        <th>Period</th>
+        <th>Course</th>
+        <th>Credits</th>
+        <th>Home Room</th>
+        <th>Score</th>
+      </tr>
+      <tbody *ngIf="scoreFormArray.controls.length else noData">
+      <tr *ngFor="let data of scoreFormArray.controls; let i = index" [formGroupName]="i">
+        <td>{{data.value.period}}</td>
+        <td>{{data.value.course}}</td>
+        <td>{{data.value.credits}}</td>
+        <td>{{data.value.homeroom}}</td>
+        <td>{{data.value.score}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<ng-template #noData>
+  <td [colSpan]="5" class="font-italic text-center">No data to display</td>
+</ng-template>
