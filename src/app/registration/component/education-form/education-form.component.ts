@@ -53,6 +53,10 @@ export class EducationFormComponent implements OnInit {
     return this.educationForm.controls.startYear as FormControl
   }
 
+  get endYearControl(): FormControl {
+    return this.educationForm.controls.endYear as FormControl
+  }
+
   get userRegistrationForm(): FormGroup {
     return this.controlContainer.control as FormGroup
   }
@@ -62,6 +66,8 @@ export class EducationFormComponent implements OnInit {
 
   resetForm() {
     this.educationForm.reset()
+    this.startYearControl.setValue(moment())
+    this.endYearControl.setValue(moment())
   }
 
   onAdd() {
@@ -86,16 +92,16 @@ export class EducationFormComponent implements OnInit {
     }
   }
 
-  chosenYearHandler(normalizedYear: Moment) {
-    const ctrlValue = this.startYearControl.value;
+  chosenYearHandler(normalizedYear: Moment, control: FormControl) {
+    const ctrlValue = control.value;
     ctrlValue.year(normalizedYear.year());
-    this.startYearControl.setValue(ctrlValue);
+    control.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<any>) {
-    const ctrlValue = this.startYearControl.value;
+  chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<any>, control: FormControl) {
+    const ctrlValue = control.value;
     ctrlValue.month(normalizedMonth.month());
-    this.startYearControl.setValue(ctrlValue);
+    control.setValue(ctrlValue);
     datepicker.close();
   }
 

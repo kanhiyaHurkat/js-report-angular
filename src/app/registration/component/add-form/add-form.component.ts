@@ -57,6 +57,10 @@ export class AddFormComponent implements OnInit {
     };
   }
 
+  removeProfileImage() {
+    this.userForm.controls.picture.setValue(null)
+  }
+
   onSubmit() {
     this.isSubmitting = true
     const payload: RegisterPostModel = RegisterPostModel.mapFromFormModel(this.userForm.value)

@@ -1,143 +1,252 @@
 <div class="logo"></div>
 <div class="form-block">
-  <h1>Basic Info</h1>
   <form [formGroup]="userForm">
-    <div class="container">
-      <div class="row">
-        <div class="col-4">
-          <img *ngIf="userForm.controls.picture.value" [src]="userForm.controls.picture.value" alt="Profile Image"
-               class="profile-img">
-          <input (change)="handleUpload($event)" *ngIf="!userForm.controls.picture.value" accept="image/*"
-                 class="border mb-4 ml-5 mr-4 p-2 pt-3 rounded-sm" type="file">
+    <div class="accordion" id="accordionExample">
+      <!--Basic Info Start-->
+      <div class="card">
+        <div class="card-header" id="basicInfoHeading">
+          <h1 class="mb-0">
+            <button aria-controls="basicInfoCollapse" aria-expanded="true" class="btn btn-link btn-block text-left"
+                    data-target="#basicInfoCollapse" data-toggle="collapse" type="button">
+              Basic Info
+            </button>
+          </h1>
         </div>
-        <div class="col-3">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Student ID<sup class="text-danger">*</sup></mat-label>
-            <input formControlName="studentId" matInput placeholder="Enter Student ID" type="text">
-            <mat-icon class="mr-2" matPrefix>person</mat-icon>
-            <mat-error *ngIf="userForm.controls.studentId.hasError('required')">
-              Student Id is required
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col-5">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Full Name<sup class="text-danger">*</sup></mat-label>
-            <input formControlName="name" matInput placeholder="Enter name"
-                   type="text">
-            <mat-icon class="mr-2" matPrefix>badge</mat-icon>
-            <mat-error *ngIf="userForm.controls.name.hasError('required')">
-              Name is required
-            </mat-error>
-          </mat-form-field>
+        <div aria-labelledby="basicInfoHeading" class="collapse show" data-parent="#accordionExample"
+             id="basicInfoCollapse">
+          <div class="card-body">
+            <div class="container mb-3">
+              <div class="row ml-5">
+                <div class="col-2">
+                  <div *ngIf="userForm.controls.picture.value" class="profile-img w-100">
+                    <img [src]="userForm.controls.picture.value" alt="Profile Image" class="mx-4">
+                    <mat-icon (click)="removeProfileImage()" class="img-btn">cancel</mat-icon>
+                  </div>
+                  <div *ngIf="!userForm.controls.picture.value"
+                       class="custom-file-upload border p-2 rounded-sm w-100 text-center font-weight-bold">
+                    <label class="h-100 w-100" for="file-upload">
+                      <mat-icon class="upload-icon">file_upload</mat-icon>
+                      <span>Upload Image</span>
+                    </label>
+                    <input (change)="handleUpload($event)" *ngIf="!userForm.controls.picture.value" accept="image/*"
+                           class=""
+                           id="file-upload" type="file">
+                  </div>
+                </div>
+                <div class="col-10">
+                  <div class="row">
+                    <div class="col-12">
+                      <mat-form-field [floatLabel]="'never'" appearance="outline">
+                        <mat-label>Full Name<sup class="text-danger">*</sup></mat-label>
+                        <input formControlName="name" matInput placeholder="Enter name"
+                               type="text">
+                        <mat-icon class="mr-2" matPrefix>badge</mat-icon>
+                        <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                          Name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <mat-form-field [floatLabel]="'never'" appearance="outline">
+                        <mat-label>Student ID<sup class="text-danger">*</sup></mat-label>
+                        <input formControlName="studentId" matInput placeholder="Enter Student ID" type="text">
+                        <mat-icon class="mr-2" matPrefix>person</mat-icon>
+                        <mat-error *ngIf="userForm.controls.studentId.hasError('required')">
+                          Student Id is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field [floatLabel]="'never'" appearance="outline">
+                    <mat-label>Language<sup class="text-danger">*</sup></mat-label>
+                    <input formControlName="language" matInput placeholder="Enter language"
+                           type="text">
+                    <mat-icon class="mr-2" matPrefix>language</mat-icon>
+                    <mat-error *ngIf="userForm.controls.language.hasError('required')">
+                      Language is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field [floatLabel]="'never'" appearance="outline">
+                    <mat-label>Gender<sup class="text-danger">*</sup></mat-label>
+                    <mat-select formControlName="gender">
+                      <mat-option *ngFor="let gender of genders" [value]="gender.key">{{gender.value}}</mat-option>
+                    </mat-select>
+                    <mat-icon class="mr-2" matPrefix>male</mat-icon>
+                    <mat-error *ngIf="userForm.controls.gender.hasError('required')">
+                      Gender is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field [floatLabel]="'never'" appearance="outline">
+                    <mat-label>DOB<sup class="text-danger">*</sup></mat-label>
+                    <input [matDatepicker]="datepicker" formControlName="dob" matInput readonly>
+                    <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
+                    <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker></mat-datepicker>
+                    <mat-error *ngIf="userForm.controls.dob.hasError('required')">
+                      Date of Birth is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field [floatLabel]="'never'" appearance="outline">
+                    <mat-label>Phone No.<sup class="text-danger">*</sup></mat-label>
+                    <input formControlName="phone" matInput placeholder="Enter Phone No." type="tel">
+                    <mat-icon class="mr-2" matPrefix>phone</mat-icon>
+                    <mat-error *ngIf="userForm.controls.phone.hasError('required')">
+                      Phone No. is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field [floatLabel]="'never'" appearance="outline">
+                    <mat-label>E-mail<sup class="text-danger">*</sup></mat-label>
+                    <input formControlName="email" matInput placeholder="Enter Email" type="email">
+                    <mat-icon class="mr-2" matPrefix>email</mat-icon>
+                    <mat-error *ngIf="userForm.controls.email.hasError('required')">
+                      Email is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field [floatLabel]="'never'" appearance="outline">
+                    <mat-label>Entered Date<sup class="text-danger">*</sup></mat-label>
+                    <input [matDatepicker]="enteredDatepicker" formControlName="enteredDate" matInput readonly>
+                    <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
+                    <mat-datepicker-toggle [for]="enteredDatepicker" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #enteredDatepicker></mat-datepicker>
+                    <mat-error *ngIf="userForm.controls.enteredDate.hasError('required')">
+                      Entered Date is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field [floatLabel]="'never'" appearance="outline">
+                    <mat-label>Address<sup class="text-danger">*</sup></mat-label>
+                    <textarea formControlName="address" matInput placeholder="Enter Address" type="text"></textarea>
+                    <mat-icon class="mt-0 mr-2" matPrefix>home</mat-icon>
+                    <mat-error *ngIf="userForm.controls.address.hasError('required')">
+                      Address is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Language<sup class="text-danger">*</sup></mat-label>
-            <input formControlName="language" matInput placeholder="Enter language"
-                   type="text">
-            <mat-icon class="mr-2" matPrefix>language</mat-icon>
-            <mat-error *ngIf="userForm.controls.language.hasError('required')">
-              Language is required
-            </mat-error>
-          </mat-form-field>
+      <!--Basic Info End-->
+
+      <!--Education Start-->
+      <div class="card">
+        <div class="card-header" id="educationHeading">
+          <h1 class="mb-0">
+            <button aria-controls="educationCollapse" aria-expanded="true" class="btn btn-link btn-block text-left"
+                    data-target="#educationCollapse" data-toggle="collapse" type="button">
+              Education
+            </button>
+          </h1>
         </div>
-        <div class="col">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Gender<sup class="text-danger">*</sup></mat-label>
-            <mat-select formControlName="gender">
-              <mat-option *ngFor="let gender of genders" [value]="gender.key">{{gender.value}}</mat-option>
-            </mat-select>
-            <mat-icon class="mr-2" matPrefix>male</mat-icon>
-            <mat-error *ngIf="userForm.controls.gender.hasError('required')">
-              Gender is required
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>DOB<sup class="text-danger">*</sup></mat-label>
-            <input [matDatepicker]="datepicker" formControlName="dob" matInput readonly>
-            <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
-            <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #datepicker>
-              <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
-              </mat-datepicker-actions>
-            </mat-datepicker>
-            <mat-error *ngIf="userForm.controls.dob.hasError('required')">
-              Date of Birth is required
-            </mat-error>
-          </mat-form-field>
+        <div aria-labelledby="educationHeading" class="collapse show" data-parent="#accordionExample"
+             id="educationCollapse">
+          <div class="card-body">
+            <app-education-form [formGroup]="userForm"></app-education-form>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Phone No.<sup class="text-danger">*</sup></mat-label>
-            <input formControlName="phone" matInput placeholder="Enter Phone No." type="tel">
-            <mat-icon class="mr-2" matPrefix>phone</mat-icon>
-            <mat-error *ngIf="userForm.controls.phone.hasError('required')">
-              Phone No. is required
-            </mat-error>
-          </mat-form-field>
+      <!--Education End-->
+
+      <!--Emergency Contact Start-->
+      <div class="card">
+        <div class="card-header" id="emergencyContactHeading">
+          <h1 class="mb-0">
+            <button aria-controls="emergencyContactCollapse" aria-expanded="true"
+                    class="btn btn-link btn-block text-left" data-target="#emergencyContactCollapse"
+                    data-toggle="collapse" type="button">
+              Emergency Contact
+            </button>
+          </h1>
         </div>
-        <div class="col">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>E-mail<sup class="text-danger">*</sup></mat-label>
-            <input formControlName="email" matInput placeholder="Enter Email" type="email">
-            <mat-icon class="mr-2" matPrefix>email</mat-icon>
-            <mat-error *ngIf="userForm.controls.email.hasError('required')">
-              Email is required
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Entered Date<sup class="text-danger">*</sup></mat-label>
-            <input [matDatepicker]="enteredDatepicker" formControlName="enteredDate" matInput readonly>
-            <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
-            <mat-datepicker-toggle [for]="enteredDatepicker" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #enteredDatepicker>
-              <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
-              </mat-datepicker-actions>
-            </mat-datepicker>
-            <mat-error *ngIf="userForm.controls.enteredDate.hasError('required')">
-              Entered Date is required
-            </mat-error>
-          </mat-form-field>
+        <div aria-labelledby="emergencyContactHeading" class="collapse show" data-parent="#accordionExample"
+             id="emergencyContactCollapse">
+          <div class="card-body">
+            <app-emergency-contact [formGroup]="userForm"></app-emergency-contact>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Address<sup class="text-danger">*</sup></mat-label>
-            <textarea formControlName="address" matInput placeholder="Enter Address" type="text"></textarea>
-            <mat-icon class="mt-0 mr-2" matPrefix>home</mat-icon>
-            <mat-error *ngIf="userForm.controls.address.hasError('required')">
-              Address is required
-            </mat-error>
-          </mat-form-field>
+      <!--Emergency Contact End-->
+
+      <!--Score Start-->
+      <div class="card">
+        <div class="card-header" id="scoreHeading">
+          <h1 class="mb-0">
+            <button aria-controls="scoreCollapse" aria-expanded="true" class="btn btn-link btn-block text-left"
+                    data-target="#scoreCollapse" data-toggle="collapse" type="button">
+              Scores
+            </button>
+          </h1>
+        </div>
+        <div aria-labelledby="scoreHeading" class="collapse show" data-parent="#accordionExample" id="scoreCollapse">
+          <div class="card-body">
+            <app-scores [formGroup]="userForm"></app-scores>
+          </div>
         </div>
       </div>
+      <!--Score End-->
+
+      <!--Class Attendance Start-->
+      <div class="card">
+        <div class="card-header" id="attendanceHeading">
+          <h1 class="mb-0">
+            <button aria-controls="attendanceCollapse" aria-expanded="true" class="btn btn-link btn-block text-left"
+                    data-target="#attendanceCollapse" data-toggle="collapse" type="button">
+              Class Attendance
+            </button>
+          </h1>
+        </div>
+        <div aria-labelledby="attendanceHeading" class="collapse show" data-parent="#accordionExample"
+             id="attendanceCollapse">
+          <div class="card-body">
+            <app-class-attendance [formGroup]="userForm"></app-class-attendance>
+          </div>
+        </div>
+      </div>
+      <!--Class Attendance End-->
+
+      <!--Last Period Rating Start-->
+      <div class="card">
+        <div class="card-header" id="lastRatingHeading">
+          <h1 class="mb-0">
+            <button aria-controls="lastRatingCollapse" aria-expanded="true" class="btn btn-link btn-block text-left"
+                    data-target="#lastRatingCollapse" data-toggle="collapse" type="button">
+              Last Period Rating
+            </button>
+          </h1>
+        </div>
+        <div aria-labelledby="lastRatingHeading" class="collapse show" data-parent="#accordionExample"
+             id="lastRatingCollapse">
+          <div class="card-body">
+            <app-last-period-rating [formGroup]="userForm"></app-last-period-rating>
+          </div>
+        </div>
+      </div>
+      <!--Last Period Rating End-->
+
     </div>
 
-    <app-education-form [formGroup]="userForm"></app-education-form>
-
-    <app-emergency-contact [formGroup]="userForm"></app-emergency-contact>
-
-    <app-scores [formGroup]="userForm"></app-scores>
-
-    <app-class-attendance [formGroup]="userForm"></app-class-attendance>
-
-    <app-last-period-rating [formGroup]="userForm"></app-last-period-rating>
-
-    <button (click)="onSubmit()" [disableRipple]="true" [disabled]="userForm.invalid" mat-raised-button>Register
+    <button (click)="onSubmit()" [disableRipple]="true" [disabled]="userForm.invalid" class="mb-5" mat-raised-button>
+      Register
     </button>
   </form>
 

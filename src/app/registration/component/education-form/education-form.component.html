@@ -1,5 +1,3 @@
-<div class="py-4 div-top-border">
-  <h1>Education</h1>
   <form [formGroup]="educationForm">
     <div class="container">
       <div class="row">
@@ -38,16 +36,13 @@
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
             <mat-label>Start Year<sup class="text-danger">*</sup></mat-label>
-            <input [matDatepicker]="startDatepicker" formControlName="startYear" matInput readonly>
+            <input [matDatepicker]="startDatepicker" [max]="currentDate" formControlName="startYear" matInput readonly>
             <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
             <mat-datepicker-toggle [for]="startDatepicker" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #startDatepicker (monthSelected)="chosenMonthHandler($event, startDatepicker)"
-                            (yearSelected)="chosenYearHandler($event)"
+            <mat-datepicker #startDatepicker
+                            (monthSelected)="chosenMonthHandler($event, startDatepicker, startYearControl)"
+                            (yearSelected)="chosenYearHandler($event, startYearControl)"
                             startView="multi-year">
-              <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
-              </mat-datepicker-actions>
             </mat-datepicker>
             <mat-error *ngIf="educationForm.controls.startYear.hasError('required')">
               Start year is required
@@ -57,16 +52,13 @@
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
             <mat-label>End Year<sup class="text-danger">*</sup></mat-label>
-            <input [matDatepicker]="endDatepicker" formControlName="endYear" matInput readonly>
+            <input [matDatepicker]="endDatepicker" [min]="startYearControl.value" formControlName="endYear" matInput
+                   readonly>
             <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
             <mat-datepicker-toggle [for]="endDatepicker" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #endDatepicker (monthSelected)="chosenMonthHandler($event, endDatepicker)"
-                            (yearSelected)="chosenYearHandler($event)"
+            <mat-datepicker #endDatepicker (monthSelected)="chosenMonthHandler($event, endDatepicker, endYearControl)"
+                            (yearSelected)="chosenYearHandler($event, endYearControl)"
                             startView="multi-year">
-              <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
-              </mat-datepicker-actions>
             </mat-datepicker>
             <mat-error *ngIf="educationForm.controls.endYear.hasError('required')">
               End year is required
@@ -115,7 +107,6 @@
       </tbody>
     </table>
   </form>
-</div>
 
 <ng-template #noData>
   <td [colSpan]="5" class="font-italic text-center">No data to display</td>

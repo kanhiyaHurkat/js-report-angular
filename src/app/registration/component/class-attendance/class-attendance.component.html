@@ -1,5 +1,4 @@
-<div class="py-4 div-top-border">
-  <h1>Class Attendance</h1>
+
   <form [formGroup]="attendanceForm">
     <div class="container">
       <div class="row">
@@ -9,12 +8,7 @@
             <input [matDatepicker]="endDatepicker" formControlName="date" matInput readonly>
             <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
             <mat-datepicker-toggle [for]="endDatepicker" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #endDatepicker>
-              <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button color="primary" mat-raised-button matDatepickerApply>Apply</button>
-              </mat-datepicker-actions>
-            </mat-datepicker>
+            <mat-datepicker #endDatepicker></mat-datepicker>
             <mat-error *ngIf="attendanceForm.controls.date.hasError('required')">
               Date is required
             </mat-error>
@@ -66,7 +60,6 @@
       </tbody>
     </table>
   </form>
-</div>
 
 <ng-template #noData>
   <td [colSpan]="5" class="font-italic text-center">No data to display</td>
