@@ -26,7 +26,7 @@
                        class="custom-file-upload border p-2 rounded-sm w-100 text-center font-weight-bold">
                     <label class="h-100 w-100" for="file-upload">
                       <mat-icon class="upload-icon">file_upload</mat-icon>
-                      <span>Upload Image</span>
+                      <span>Upload Image<sup class="text-danger">*</sup></span>
                     </label>
                     <input (change)="handleUpload($event)" *ngIf="!userForm.controls.picture.value" accept="image/*"
                            class=""
@@ -63,8 +63,10 @@
                 <div class="col">
                   <mat-form-field [floatLabel]="'never'" appearance="outline">
                     <mat-label>Language<sup class="text-danger">*</sup></mat-label>
-                    <input formControlName="language" matInput placeholder="Enter language"
-                           type="text">
+                    <mat-select formControlName="language">
+                      <mat-option *ngFor="let language of languages"
+                                  [value]="language.key">{{language.value}}</mat-option>
+                    </mat-select>
                     <mat-icon class="mr-2" matPrefix>language</mat-icon>
                     <mat-error *ngIf="userForm.controls.language.hasError('required')">
                       Language is required
@@ -86,7 +88,7 @@
                 <div class="col">
                   <mat-form-field [floatLabel]="'never'" appearance="outline">
                     <mat-label>DOB<sup class="text-danger">*</sup></mat-label>
-                    <input [matDatepicker]="datepicker" formControlName="dob" matInput readonly>
+                    <input [matDatepicker]="datepicker" [max]="currentDate" formControlName="dob" matInput readonly>
                     <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
                     <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
                     <mat-datepicker #datepicker></mat-datepicker>
@@ -100,10 +102,13 @@
                 <div class="col">
                   <mat-form-field [floatLabel]="'never'" appearance="outline">
                     <mat-label>Phone No.<sup class="text-danger">*</sup></mat-label>
-                    <input formControlName="phone" matInput placeholder="Enter Phone No." type="tel">
+                    <input formControlName="phone" mask="0000000000" matInput placeholder="Enter Phone No." type="tel">
                     <mat-icon class="mr-2" matPrefix>phone</mat-icon>
                     <mat-error *ngIf="userForm.controls.phone.hasError('required')">
                       Phone No. is required
+                    </mat-error>
+                    <mat-error *ngIf="userForm.controls.phone.hasError('mask')">
+                      Invalid Phone No.
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -120,7 +125,8 @@
                 <div class="col">
                   <mat-form-field [floatLabel]="'never'" appearance="outline">
                     <mat-label>Entered Date<sup class="text-danger">*</sup></mat-label>
-                    <input [matDatepicker]="enteredDatepicker" formControlName="enteredDate" matInput readonly>
+                    <input [matDatepicker]="enteredDatepicker" [max]="currentDate" formControlName="enteredDate"
+                           matInput readonly>
                     <mat-icon class="mr-2" matPrefix>date_range</mat-icon>
                     <mat-datepicker-toggle [for]="enteredDatepicker" matSuffix></mat-datepicker-toggle>
                     <mat-datepicker #enteredDatepicker></mat-datepicker>

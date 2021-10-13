@@ -18,6 +18,7 @@ import {ScoresComponent} from './component/scores/scores.component';
 import {ClassAttendanceComponent} from './component/class-attendance/class-attendance.component';
 import {LastPeriodRatingComponent} from './component/last-period-rating/last-period-rating.component';
 import {MatSelectModule} from "@angular/material/select";
+import {NgxMaskModule} from "ngx-mask";
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatDatepickerModule,
     MatCheckboxModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMaskModule
   ]
 })
 export class RegistrationModule {

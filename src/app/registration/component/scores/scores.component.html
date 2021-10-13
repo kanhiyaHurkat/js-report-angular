@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Period</mat-label>
+            <mat-label>Period<sup class="text-danger">*</sup></mat-label>
             <input formControlName="period" matInput placeholder="Enter Period" type="number">
             <mat-icon class="mr-2" matPrefix>feed</mat-icon>
             <mat-error *ngIf="scoreForm.controls.period.hasError('required')">
@@ -14,7 +14,7 @@
         </div>
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Course</mat-label>
+            <mat-label>Course<sup class="text-danger">*</sup></mat-label>
             <input formControlName="course" matInput placeholder="Enter course" type="text">
             <mat-icon class="mr-2" matPrefix>task</mat-icon>
             <mat-error *ngIf="scoreForm.controls.course.hasError('required')">
@@ -24,7 +24,7 @@
         </div>
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Credits</mat-label>
+            <mat-label>Credits<sup class="text-danger">*</sup></mat-label>
             <input formControlName="credits" matInput placeholder="Enter credits" type="number">
             <mat-icon class="mr-2" matPrefix>credit_card</mat-icon>
             <mat-error *ngIf="scoreForm.controls.credits.hasError('required')">
@@ -36,7 +36,7 @@
       <div class="row">
         <div class="col-4">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Home Room</mat-label>
+            <mat-label>Home Room<sup class="text-danger">*</sup></mat-label>
             <input formControlName="homeroom" matInput placeholder="Enter homeroom" type="number">
             <mat-icon class="mr-2" matPrefix>meeting_room</mat-icon>
             <mat-error *ngIf="scoreForm.controls.homeroom.hasError('required')">
@@ -46,7 +46,7 @@
         </div>
         <div class="col-4">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Score</mat-label>
+            <mat-label>Score<sup class="text-danger">*</sup></mat-label>
             <input formControlName="score" matInput placeholder="Enter score" type="number">
             <mat-icon class="mr-2" matPrefix>score</mat-icon>
             <mat-error *ngIf="scoreForm.controls.score.hasError('required')">

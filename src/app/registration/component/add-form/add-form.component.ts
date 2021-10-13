@@ -4,6 +4,7 @@ import {AddFormService} from "../../service/add-form.service";
 import {AddFormHttpService} from "../../service/add-form-http.service";
 import {RegisterPostModel} from "../../model/register-post.model";
 import {take} from "rxjs/operators";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-add-form',
@@ -13,6 +14,23 @@ import {take} from "rxjs/operators";
 export class AddFormComponent implements OnInit {
 
   isSubmitting = false
+
+  currentDate = moment().format()
+
+  languages = [
+    {
+      key: 'English',
+      value: 'English'
+    },
+    {
+      key: 'Hindi',
+      value: 'Hindi'
+    },
+    {
+      key: 'Gujarati',
+      value: 'Gujarati'
+    },
+  ]
 
   genders = [
     {

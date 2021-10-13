@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Period</mat-label>
+            <mat-label>Period<sup class="text-danger">*</sup></mat-label>
             <input formControlName="period" matInput placeholder="Enter Period" type="number">
             <mat-icon class="mr-2" matPrefix>person_outline</mat-icon>
             <mat-error *ngIf="lastPeriodForm.controls.period.hasError('required')">
@@ -13,7 +13,7 @@
         </div>
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>High Course</mat-label>
+            <mat-label>High Course<sup class="text-danger">*</sup></mat-label>
             <input formControlName="mediumCourses" matInput placeholder="Enter mediumCourses" type="number">
             <mat-icon class="mr-2" matPrefix>lock_outline</mat-icon>
             <mat-error *ngIf="lastPeriodForm.controls.mediumCourses.hasError('required')">
@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Medium Course</mat-label>
+            <mat-label>Medium Course<sup class="text-danger">*</sup></mat-label>
             <input formControlName="highCourses" matInput placeholder="Enter highCourses" type="number">
             <mat-icon class="mr-2" matPrefix>lock_outline</mat-icon>
             <mat-error *ngIf="lastPeriodForm.controls.highCourses.hasError('required')">
@@ -35,7 +35,7 @@
         </div>
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Low Course</mat-label>
+            <mat-label>Low Course<sup class="text-danger">*</sup></mat-label>
             <input formControlName="lowCourses" matInput placeholder="Enter lowCourses" type="number">
             <mat-icon class="mr-2" matPrefix>lock_outline</mat-icon>
             <mat-error *ngIf="lastPeriodForm.controls.lowCourses.hasError('required')">

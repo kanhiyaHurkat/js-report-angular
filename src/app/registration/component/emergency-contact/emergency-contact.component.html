@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Name</mat-label>
+            <mat-label>Name<sup class="text-danger">*</sup></mat-label>
             <input formControlName="name" matInput placeholder="Enter Name" type="text">
             <mat-icon class="mr-2" matPrefix>badge</mat-icon>
             <mat-error *ngIf="emergencyContactForm.controls.name.hasError('required')">
@@ -15,8 +15,8 @@
         </div>
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Priority</mat-label>
-            <input formControlName="priority" matInput placeholder="Enter priority" type="number">
+            <mat-label>Priority<sup class="text-danger">*</sup></mat-label>
+            <input formControlName="priority" mask="0*" matInput placeholder="Enter priority">
             <mat-icon class="mr-2" matPrefix>priority_high</mat-icon>
             <mat-error *ngIf="emergencyContactForm.controls.priority.hasError('required')">
               Priority is required
@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
-            <mat-label>Relation</mat-label>
+            <mat-label>Relation<sup class="text-danger">*</sup></mat-label>
             <input formControlName="relation" matInput placeholder="Enter relation" type="text">
             <mat-icon class="mr-2" matPrefix>connect_without_contact</mat-icon>
             <mat-error *ngIf="emergencyContactForm.controls.relation.hasError('required')">
@@ -38,10 +38,13 @@
         <div class="col">
           <mat-form-field [floatLabel]="'never'" appearance="outline">
             <mat-label>Phone No.<sup class="text-danger">*</sup></mat-label>
-            <input formControlName="phone" matInput placeholder="Enter Phone No." type="tel">
+            <input formControlName="phone" mask="0000000000" matInput placeholder="Enter Phone No." type="tel">
             <mat-icon class="mr-2" matPrefix>phone</mat-icon>
             <mat-error *ngIf="emergencyContactForm.controls.phone.hasError('required')">
               Phone No. is required
+            </mat-error>
+            <mat-error *ngIf="emergencyContactForm.controls.phone.hasError('mask')">
+              Invalid Phone No.
             </mat-error>
           </mat-form-field>
         </div>
