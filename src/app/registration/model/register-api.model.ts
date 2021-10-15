@@ -1,5 +1,7 @@
 export class RegisterApiModel {
+  _id!: string
   studentId: string | undefined
+  picture: string | undefined
   name: string | undefined
   gender: string | undefined
   dob: string | undefined
@@ -16,6 +18,7 @@ export class RegisterApiModel {
 }
 
 export class EducationApiModel {
+  _id!: string
   name: string | undefined
   city: string | undefined
   country: string | undefined
@@ -25,6 +28,7 @@ export class EducationApiModel {
 }
 
 export class EmergencyContactApiModel {
+  _id!: string
   name: string | undefined
   priority: string | number | undefined
   relationship: string | undefined
@@ -32,6 +36,7 @@ export class EmergencyContactApiModel {
 }
 
 export class ScoreApiModel {
+  _id!: string
   period: number | undefined
   course: string | undefined
   credits: number | undefined
@@ -40,11 +45,13 @@ export class ScoreApiModel {
 }
 
 export class AttendanceApiModel {
+  _id!: string
   date: string | undefined
   state: string | undefined
 }
 
 export class LastRatingApiModel {
+  _id!: string
   period: number | undefined
   highCourses: number | undefined
   mediumCourses: number | undefined

@@ -9,11 +9,12 @@ import {
 import * as moment from "moment";
 
 export class RegisterPostModel {
+  _id: string | undefined
   studentId: string | undefined
   picture: string | undefined
   name: string | undefined
   gender: string | undefined
-  dateOfBirth: string | undefined
+  dob: string | undefined
   phone: string | undefined
   email: string | undefined
   address: string | undefined
@@ -27,11 +28,12 @@ export class RegisterPostModel {
 
   static mapFromFormModel(formData: RegisterFormModel): RegisterPostModel {
     const payload = new RegisterPostModel()
+    payload._id = formData.id
     payload.studentId = formData.studentId
     payload.picture = formData.picture
     payload.name = formData.name
     payload.gender = formData.gender
-    payload.dateOfBirth = moment(formData.dob).format('YYYY-MM-DD')
+    payload.dob = moment(formData.dob).format('YYYY-MM-DD')
     payload.phone = formData.phone
     payload.email = formData.email
     payload.address = formData.address
@@ -47,6 +49,7 @@ export class RegisterPostModel {
 }
 
 export class EducationPostModel {
+  _id: string | undefined
   name: string | undefined
   city: string | undefined
   country: string | undefined
@@ -56,6 +59,7 @@ export class EducationPostModel {
 
   static mapFromFormModel(formData: EducationFormModel): EducationPostModel {
     const payload = new EducationPostModel()
+    payload._id = formData.id
     payload.name = formData.schoolName
     payload.city = formData.city
     payload.country = formData.country
@@ -67,6 +71,7 @@ export class EducationPostModel {
 }
 
 export class EmergencyContactPostModel {
+  _id: string | undefined
   name: string | undefined
   priority: string | number | undefined
   relationship: string | undefined
@@ -74,6 +79,7 @@ export class EmergencyContactPostModel {
 
   static mapFromFormModel(formData: EmergencyContactFormModel): EmergencyContactPostModel {
     const payload = new EmergencyContactPostModel()
+    payload._id = formData.id
     payload.name = formData.name
     payload.priority = formData.priority
     payload.relationship = formData.relation
@@ -83,6 +89,7 @@ export class EmergencyContactPostModel {
 }
 
 export class ScorePostModel {
+  _id: string | undefined
   period: number | undefined
   course: string | undefined
   credits: number | undefined
@@ -91,6 +98,7 @@ export class ScorePostModel {
 
   static mapFromFormModel(formData: ScoreFormModel): ScorePostModel {
     const payload = new ScorePostModel()
+    payload._id = formData.id
     payload.period = formData.period
     payload.course = formData.course
     payload.credits = formData.credits
@@ -101,11 +109,13 @@ export class ScorePostModel {
 }
 
 export class AttendancePostModel {
+  _id: string | undefined
   date: string | undefined
   state: string | undefined
 
   static mapFromFromModel(formData: AttendanceFormModel): AttendancePostModel {
     const payload = new AttendancePostModel()
+    payload._id = formData.id
     payload.date = moment(formData.date).format('YYYY-MM-DD')
     payload.state = formData.state
     return payload
@@ -113,6 +123,7 @@ export class AttendancePostModel {
 }
 
 export class LastRatingPostModel {
+  _id: string | undefined
   period: number | undefined
   highCourses: number | undefined
   mediumCourses: number | undefined
@@ -120,6 +131,7 @@ export class LastRatingPostModel {
 
   static mapFromFormModel(formData: LastRatingFormModel): LastRatingPostModel {
     const payload = new LastRatingPostModel()
+    payload._id = formData.id
     payload.period = formData.period
     payload.highCourses = formData.highCourses
     payload.mediumCourses = formData.mediumCourses

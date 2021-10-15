@@ -1,0 +1,74 @@
+<div class="add-user-div">
+  <button class="add-user-btn" mat-raised-button routerLink="/add-user">Add User</button>
+  <button (click)="printUser()" class="print-user-btn" mat-raised-button>Print All Users</button>
+</div>
+<div class="form-block mt-5">
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h1 class="mb-0">
+          <button aria-controls="collapseOne" aria-expanded="true" class="btn btn-link btn-block text-left"
+                  data-target="#collapseOne" data-toggle="collapse" type="button">
+            Users List
+          </button>
+        </h1>
+      </div>
+
+      <div aria-labelledby="headingOne" class="collapse show" data-parent="#accordionExample" id="collapseOne">
+        <div class="card-body">
+          <button (click)="onDeleteMultiple()" *ngIf="someComplete() || allDeleted " class="delete-btn"
+                  mat-raised-button>Delete
+          </button>
+          <table>
+            <tr>
+              <th>
+                <mat-checkbox (change)="setAll($event.checked)"
+                              [checked]="allDeleted"
+                              [indeterminate]="someComplete()"
+                              class="example-margin">
+                </mat-checkbox>
+              </th>
+              <th>#</th>
+              <th>Profile Image</th>
+              <th>Student ID</th>
+              <th>Student Name</th>
+              <th>Student Phone</th>
+              <th></th>
+            </tr>
+            <tbody *ngIf="userList as users else loading">
+            <ng-container *ngIf="users.length else noData">
+              <tr *ngFor="let user of users; let userIndex = index">
+                <td>
+                  <mat-checkbox [(ngModel)]="user.isSelected" (ngModelChange)="updateAllComplete()"></mat-checkbox>
+                </td>
+                <td>{{userIndex + 1}}</td>
+                <td><img [src]="user.picture" alt="profile image" class="profile-img"></td>
+                <td>{{user.studentId}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.phone}}</td>
+                <td>
+                  <div>
+                    <mat-icon (click)="onView(user.id)">visibility</mat-icon>
+                    <mat-icon (click)="onEdit(user.id)">edit</mat-icon>
+                    <mat-icon (click)="onDelete(user.id)">delete</mat-icon>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noData>
+  <td [colSpan]="6" class="font-italic text-center">No data to display</td>
+</ng-template>
+
+<ng-template #loading>
+  <td [colSpan]="5">
+    <mat-spinner class="m-auto" diameter="50"></mat-spinner>
+  </td>
+</ng-template>

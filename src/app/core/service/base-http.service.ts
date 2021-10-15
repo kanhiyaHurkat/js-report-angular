@@ -19,7 +19,7 @@ export class BaseHttpService {
     return this.http.post(`${this.apiUrl}${url}`, data, {params})
   }
 
-  get(url: string, params?: HttpParams) {
+  get(url: string, params?: HttpParams): Observable<any> {
     return this.http.get(`${this.apiUrl}${url}`, {params})
   }
 

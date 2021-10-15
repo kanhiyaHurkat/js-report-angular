@@ -19,6 +19,11 @@ import {ClassAttendanceComponent} from './component/class-attendance/class-atten
 import {LastPeriodRatingComponent} from './component/last-period-rating/last-period-rating.component';
 import {MatSelectModule} from "@angular/material/select";
 import {NgxMaskModule} from "ngx-mask";
+import {ListComponent} from './component/list/list.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {DeleteModalComponent} from './component/delete-modal/delete-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -28,7 +33,9 @@ import {NgxMaskModule} from "ngx-mask";
     EmergencyContactComponent,
     ScoresComponent,
     ClassAttendanceComponent,
-    LastPeriodRatingComponent
+    LastPeriodRatingComponent,
+    ListComponent,
+    DeleteModalComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +51,13 @@ import {NgxMaskModule} from "ngx-mask";
     MatCheckboxModule,
     MatStepperModule,
     MatSelectModule,
-    NgxMaskModule
+    NgxMaskModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    DeleteModalComponent
   ]
 })
 export class RegistrationModule {
