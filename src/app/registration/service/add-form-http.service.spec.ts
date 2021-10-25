@@ -64,53 +64,7 @@ describe('AddFormHttpService', () => {
       lowCourses: 4
     }]
   }
-  const viewMockData: RegisterViewModel = {
-    id: '123',
-    studentId: "2",
-    picture: "",
-    name: "2",
-    gender: "male",
-    dob: "2021-10-14",
-    phone: "1234567890",
-    email: "ads@dc.sdf",
-    address: "asd",
-    language: "English",
-    enteredDate: "2021-10-15",
-    schools: [
-      {
-        name: "2",
-        city: "2",
-        country: "2",
-        yearStart: "2021",
-        yearEnd: "2021",
-        isPresent: false
-      }
-    ],
-    contacts: [{
-      name: "name",
-      priority: "priority",
-      relationship: "relation",
-      phone: "phone",
-    }],
-    scores: [{
-      period: 1,
-      course: "course",
-      credits: 2,
-      homeroom: 3,
-      score: 4,
-    }],
-    attendance: [{
-      date: "date",
-      state: "state",
-    }],
-    lastRating: [{
-      period: 1,
-      highCourses: 2,
-      mediumCourses: 3,
-      lowCourses: 4
-    }],
-    isSelected: false
-  }
+
   const apiMockData: RegisterApiModel = {
     _id: '123',
     studentId: "2",

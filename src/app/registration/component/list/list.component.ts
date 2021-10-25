@@ -13,7 +13,7 @@ import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
 })
 export class ListComponent implements OnInit {
 
-  userList: RegisterViewModel[] = []
+  userList: null | RegisterViewModel[] = []
   allDeleted: boolean = false;
 
   constructor(
@@ -67,7 +67,7 @@ export class ListComponent implements OnInit {
       take(1)
     ).subscribe((isConfirmed: boolean) => {
       if (isConfirmed) {
-        const selectedUser = this.userList.filter(user => user.isSelected)
+        const selectedUser = (this.userList as RegisterViewModel[]).filter(user => user.isSelected)
         if (selectedUser && selectedUser.length) {
           const deletedItems = selectedUser.map(item => item.id)
           this.httpService.deleteUser(deletedItems).pipe(
