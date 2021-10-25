@@ -19,7 +19,7 @@ export class ClassAttendanceComponent implements OnInit {
   }
 
   get attendanceFormArray(): FormArray {
-    return this.controlContainer.control?.get('attendance') as FormArray
+    return this.userRegistrationForm.get('attendance') as FormArray
   }
 
   get userRegistrationForm(): FormGroup {

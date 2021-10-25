@@ -1,6 +1,13 @@
 import {ClassAttendanceComponent} from "./class-attendance.component";
 import {ComponentFixture, TestBed} from "@angular/core/testing";
-import {ControlContainer, FormArray, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {
+  ControlContainer,
+  FormArray,
+  FormGroup,
+  FormGroupDirective,
+  FormsModule,
+  ReactiveFormsModule
+} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -24,7 +31,8 @@ describe('Component: Class Attendance', () => {
   let fixture: ComponentFixture<ClassAttendanceComponent>
   let component: ClassAttendanceComponent
   let controlContainer: ControlContainer
-  let attendanceFormArray: FormArray
+  let formGroup: FormGroup
+  let formGroupDirective: FormGroupDirective
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -51,7 +59,9 @@ describe('Component: Class Attendance', () => {
         NgxMaskModule.forRoot(),
         BrowserAnimationsModule
       ],
-      providers: [ControlContainer]
+      providers: [
+        { provide: ControlContainer, useValue: formGroupDirective }
+      ]
     }).compileComponents()
 
     jest.mock('../../service/add-form.service', () => ({
@@ -59,8 +69,15 @@ describe('Component: Class Attendance', () => {
     }))
     fixture = TestBed.createComponent(ClassAttendanceComponent)
     component = fixture.componentInstance
+
+    formGroup = new FormGroup({
+      attendance : new FormArray([]),
+    })
+
+    formGroupDirective = new FormGroupDirective([],[])
+    formGroupDirective.form = formGroup
+
     controlContainer = TestBed.inject(ControlContainer)
-    attendanceFormArray = controlContainer.control?.get('attendance') as FormArray
   })
 
   describe('ClassAttendanceComponent', () => {
