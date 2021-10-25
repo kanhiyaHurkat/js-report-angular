@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ControlContainer, FormArray, FormControl, FormGroup} from "@angular/forms";
 import {AddFormService} from "../../service/add-form.service";
-import * as moment from "moment";
+import moment from "moment";
 import {Moment} from "moment";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from '@angular/material-moment-adapter';

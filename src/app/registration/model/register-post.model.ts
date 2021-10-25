@@ -6,7 +6,7 @@ import {
   RegisterFormModel,
   ScoreFormModel
 } from "./register-form.model";
-import * as moment from "moment";
+import moment from "moment";
 
 export class RegisterPostModel {
   _id: string | undefined

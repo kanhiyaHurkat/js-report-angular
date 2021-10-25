@@ -1,5 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from "./app-routing.module";
+import {RouterModule} from "@angular/router";
+import {APP_BASE_HREF} from "@angular/common";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -7,6 +10,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [RouterModule, AppRoutingModule],
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ]
     }).compileComponents();
   });
 
@@ -20,12 +27,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('js-report-angular');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('js-report-angular app is running!');
   });
 });

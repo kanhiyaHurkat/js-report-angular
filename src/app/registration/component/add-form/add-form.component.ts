@@ -4,7 +4,6 @@ import {AddFormService} from "../../service/add-form.service";
 import {AddFormHttpService} from "../../service/add-form-http.service";
 import {RegisterPostModel} from "../../model/register-post.model";
 import {take} from "rxjs/operators";
-import * as moment from "moment";
 import {ActivatedRoute, Router} from "@angular/router";
 import {
   AttendanceFormModel,
@@ -15,6 +14,7 @@ import {
   ScoreFormModel
 } from "../../model/register-form.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import moment from "moment";
 
 @Component({
   selector: 'app-add-form',
@@ -160,7 +160,7 @@ export class AddFormComponent implements OnInit {
     })
   }
 
-  patchArrayData(
+  /*patchArrayData(
     data: EducationFormModel[] | EmergencyContactFormModel[] | ScoreFormModel[] | AttendanceFormModel[] | LastRatingFormModel[],
     form: FormGroup,
     array: FormArray) {
@@ -171,7 +171,7 @@ export class AddFormComponent implements OnInit {
         array.push(formGroup)
       })
     }
-  }
+  }*/
 
   handleUpload(event: any) {
     const file = event.target.files[0];

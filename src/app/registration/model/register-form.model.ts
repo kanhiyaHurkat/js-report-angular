@@ -6,7 +6,7 @@ import {
   RegisterApiModel,
   ScoreApiModel
 } from "./register-api.model";
-import * as moment from "moment";
+import moment from "moment";
 
 export class RegisterFormModel {
   id: string | undefined

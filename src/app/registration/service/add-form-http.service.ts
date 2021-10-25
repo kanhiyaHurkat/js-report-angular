@@ -54,15 +54,4 @@ export class AddFormHttpService {
   deleteUser(deletedItems: string[]): Observable<any> {
     return this.baseHttpService.post(`registration/delete_user`, {deletedItems})
   }
-
-  getReport() {
-    return this.baseHttpService.get(`registration/view_user`)
-  }
-
-  getJsReport() {
-    const parameter = {
-      template: {shortid: '5SY-K7zjnb'}
-    }
-    return this.baseHttpService.postJsReport(``, parameter)
-  }
 }
